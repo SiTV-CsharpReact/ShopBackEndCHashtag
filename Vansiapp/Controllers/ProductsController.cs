@@ -10,25 +10,23 @@ namespace API.Controllers
 {
     [ApiController]
     [Route("api/[controller]")]
-    public class UsersController : ControllerBase
+    public class ProductsController
     {
-        private readonly DataContext _context;
-
-        public UsersController(DataContext context)
+        private readonly StoreContext _context;
+        public ProductsController(StoreContext context)
         {
             this._context = context;
         }
         [HttpGet]
-        public async Task<ActionResult<IEnumerable<AppUser>>> GetUsers()
+        public async Task<ActionResult<List<Product>>> GetProducts()
         {
-            return await _context.Users.ToListAsync();
-
+            return await _context.Products.ToListAsync();
+          
         }
         [HttpGet("{id}")]
-        public async Task<ActionResult<AppUser>> GetUser(int id)
+        public async Task<ActionResult<Product>> GetProduct(int id)
         {
-            return await _context.Users.FindAsync(id);
-
+            return await _context.Products.FindAsync(id);
         }
     }
 }
